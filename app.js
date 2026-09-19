@@ -1,3 +1,4 @@
+
 // 1. Importowanie Firebase z linków URL (nie z paczek npm, aby działało bez serwera lokalnego!)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
