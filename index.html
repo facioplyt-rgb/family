@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rodzinne Centrum Dowodzenia</title>
-    <!-- Ładowanie stylów Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-100 min-h-screen text-slate-800 font-sans">
     
-    <!-- ========================================== -->
-    <!-- EKRAN 1: LOGOWANIE / REJESTRACJA           -->
-    <!-- ========================================== -->
+    <!-- EKRAN LOGOWANIA -->
     <div id="auth-screen" class="flex items-center justify-center min-h-screen p-4">
         <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
             <div class="text-center mb-6">
@@ -19,52 +16,31 @@
                 <h1 class="text-2xl font-bold">Centrum Rodzinne</h1>
                 <p class="text-slate-500 text-sm mt-1">Zaloguj się, utwórz grupę lub dołącz</p>
             </div>
-
             <div class="space-y-5">
-                <!-- Podanie imienia (wymagane do wszystkiego) -->
                 <div>
                     <label class="block text-xs font-bold text-slate-500 mb-1">TWOJE IMIĘ</label>
-                    <input type="text" id="userNameInput" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none transition-all" placeholder="np. Fabian">
+                    <input type="text" id="userNameInput" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="np. Fabian">
                 </div>
-                
-                <div class="relative flex py-2 items-center">
-                    <div class="flex-grow border-t border-slate-200"></div>
-                    <span class="flex-shrink-0 mx-4 text-slate-400 text-xs">UTWÓRZ NOWĄ</span>
-                    <div class="flex-grow border-t border-slate-200"></div>
-                </div>
-
-                <!-- Opcja A: Tworzenie -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 mb-1">NAZWA RODZINY</label>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">NAZWA NOWEJ RODZINY</label>
                     <div class="flex gap-2">
                         <input type="text" id="familyNameInput" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="np. Żukowscy">
-                        <button id="createFamilyBtn" class="bg-indigo-600 text-white font-bold py-2.5 px-5 rounded hover:bg-indigo-700 transition-colors whitespace-nowrap shadow-md">Stwórz</button>
+                        <button id="createFamilyBtn" class="bg-indigo-600 text-white font-bold py-2.5 px-5 rounded hover:bg-indigo-700 whitespace-nowrap">Stwórz</button>
                     </div>
                 </div>
-                
-                <div class="relative flex py-2 items-center">
-                    <div class="flex-grow border-t border-slate-200"></div>
-                    <span class="flex-shrink-0 mx-4 text-slate-400 text-xs">LUB DOŁĄCZ</span>
-                    <div class="flex-grow border-t border-slate-200"></div>
-                </div>
-
-                <!-- Opcja B: Dołączanie -->
                 <div>
                     <label class="block text-xs font-bold text-slate-500 mb-1">KOD ZAPROSZENIA</label>
                     <div class="flex gap-2">
                         <input type="text" id="joinFamilyInput" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Wklej kod...">
-                        <button id="joinFamilyBtn" class="bg-slate-200 text-slate-700 font-bold py-2.5 px-5 rounded hover:bg-slate-300 transition-colors whitespace-nowrap shadow-sm">Dołącz</button>
+                        <button id="joinFamilyBtn" class="bg-slate-200 text-slate-700 font-bold py-2.5 px-5 rounded hover:bg-slate-300 whitespace-nowrap">Dołącz</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- EKRAN 2: GŁÓWNY PANEL (Po zalogowaniu)     -->
-    <!-- ========================================== -->
-    <div id="dashboard-screen" class="hidden min-h-screen flex-col">
-        <!-- Pasek górny -->
+    <!-- PANEL GŁÓWNY -->
+    <div id="dashboard-screen" class="hidden min-h-screen flex flex-col">
         <header class="bg-indigo-600 text-white p-4 shadow-md flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <span class="text-2xl">🏠</span>
@@ -72,28 +48,78 @@
             </div>
             <div class="flex items-center gap-4">
                 <span class="text-sm bg-indigo-700 px-3 py-1 rounded-full" id="dashboardUserName">Witaj!</span>
-                <button id="logoutBtn" class="text-sm bg-white text-indigo-600 font-bold px-3 py-1 rounded hover:bg-slate-100 transition-colors">Wyloguj</button>
+                <button id="logoutBtn" class="text-sm bg-white text-indigo-600 font-bold px-3 py-1 rounded hover:bg-slate-100">Wyloguj</button>
             </div>
         </header>
 
-        <!-- Główna zawartość -->
-        <main class="p-6 max-w-4xl mx-auto w-full flex-grow">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-xl font-bold mb-4">Kod Twojej rodziny</h2>
-                <p class="text-sm text-slate-600 mb-2">Przekaż ten kod innym domownikom, aby mogli dołączyć do panelu:</p>
-                <div class="bg-slate-100 p-3 rounded border border-slate-200 font-mono text-lg font-bold text-center tracking-widest text-indigo-700 select-all" id="displayFamilyCode">
-                    BRAK KODU
+        <!-- Nawigacja zakładek -->
+        <nav class="bg-white border-b border-slate-200 px-6 flex gap-4 overflow-x-auto shadow-sm">
+            <button class="tab-btn py-3 px-4 font-bold border-b-2 border-indigo-600 text-indigo-600 text-sm whitespace-nowrap" data-target="tab-home">Strona Główna</button>
+            <button class="tab-btn py-3 px-4 font-bold text-slate-500 hover:text-indigo-600 text-sm whitespace-nowrap" data-target="tab-chores">Obowiązki</button>
+            <button class="tab-btn py-3 px-4 font-bold text-slate-500 hover:text-indigo-600 text-sm whitespace-nowrap" data-target="tab-calendar">Kalendarz / Rezerwacje</button>
+            <button class="tab-btn py-3 px-4 font-bold text-slate-500 hover:text-indigo-600 text-sm whitespace-nowrap" data-target="tab-announcements">Ogłoszenia</button>
+            <button class="tab-btn py-3 px-4 font-bold text-slate-500 hover:text-indigo-600 text-sm whitespace-nowrap" data-target="tab-settings">Zarządzanie</button>
+        </nav>
+
+        <!-- Zawartość zakładek -->
+        <main class="p-6 max-w-5xl mx-auto w-full flex-grow">
+            
+            <!-- ZAKŁADKA 1: START -->
+            <div id="tab-home" class="tab-content space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold mb-2">Kod Twojej rodziny</h2>
+                    <p class="text-sm text-slate-600 mb-2">Przekaż ten kod innym domownikom, aby mogli dołączyć:</p>
+                    <div class="bg-slate-100 p-3 rounded border border-slate-200 font-mono text-lg font-bold text-center tracking-widest text-indigo-700 select-all" id="displayFamilyCode">---</div>
                 </div>
             </div>
-            
-            <!-- Tutaj w przyszłości dodamy kalendarz, listę zadań itp. -->
-            <div class="mt-6 text-center text-slate-400">
-                <p>Miejsce na moduł zadań i kalendarza...</p>
+
+            <!-- ZAKŁADKA 2: OBOWIĄZKI -->
+            <div id="tab-chores" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold mb-4">Lista Obowiązków domowych</h2>
+                    <div class="flex gap-2 mb-4">
+                        <input type="text" id="choreTitle" placeholder="Co trzeba zrobić? (np. Wynieść śmieci)" class="w-full bg-slate-50 border border-slate-200 rounded p-2">
+                        <input type="text" id="choreAssignee" placeholder="Dla kogo?" class="w-48 bg-slate-50 border border-slate-200 rounded p-2">
+                        <button id="addChoreBtn" class="bg-indigo-600 text-white font-bold px-4 py-2 rounded hover:bg-indigo-700 whitespace-nowrap">Dodaj</button>
+                    </div>
+                    <div id="choresList" class="space-y-2"><!-- Tutaj wpadną zadania --></div>
+                </div>
             </div>
+
+            <!-- ZAKŁADKA 3: KALENDARZ -->
+            <div id="tab-calendar" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold mb-4">Kalendarz i Rezerwacje (np. Pralka, Samochód)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
+                        <input type="text" id="eventTitle" placeholder="Co rezerwujesz? (np. Pralka)" class="bg-slate-50 border border-slate-200 rounded p-2">
+                        <input type="datetime-local" id="eventDate" class="bg-slate-50 border border-slate-200 rounded p-2">
+                        <button id="addEventBtn" class="bg-indigo-600 text-white font-bold px-4 py-2 rounded hover:bg-indigo-700">Zarezerwuj / Zaplanuj</button>
+                    </div>
+                    <div id="eventsList" class="space-y-2"><!-- Tutaj wpadną rezerwacje --></div>
+                </div>
+            </div>
+
+            <!-- ZAKŁADKA 4: OGŁOSZENIA -->
+            <div id="tab-announcements" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold mb-4">Tablica Ogłoszeń</h2>
+                    <textarea id="announcementText" placeholder="Napisz coś ważnego dla rodziny..." class="w-full bg-slate-50 border border-slate-200 rounded p-2 mb-2 h-24"></textarea>
+                    <button id="addAnnouncementBtn" class="bg-indigo-600 text-white font-bold px-4 py-2 rounded hover:bg-indigo-700">Opublikuj ogłoszenie</button>
+                    <div id="announcementsList" class="mt-6 space-y-3"><!-- Tutaj wpadną ogłoszenia --></div>
+                </div>
+            </div>
+
+            <!-- ZAKŁADKA 5: ZARZĄDZANIE -->
+            <div id="tab-settings" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold mb-4">Członkowie rodziny i Role</h2>
+                    <div id="membersList" class="space-y-2"><!-- Lista domowników --></div>
+                </div>
+            </div>
+
         </main>
     </div>
 
-    <!-- Ładowanie skryptu z logiką Firebase (zawsze używaj type="module") -->
     <script type="module" src="./app.js"></script>
 </body>
 </html>
