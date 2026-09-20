@@ -1,0 +1,17 @@
+{
+  "name": "Centrum Rodzinne",
+  "short_name": "Rodzina",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f3f2f1",
+  "theme_color": "#0078d4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/25/25694.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
